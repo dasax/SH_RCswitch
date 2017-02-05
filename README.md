@@ -101,12 +101,12 @@ Adding the following lines to plungin.conf in smarthomeNG will enable the rcswit
 <pre>[rc]
     class_name = RCswitch
     class_path = plugins.rcswitch
-    rcswitch_dir = <path of rc switch> # optional parameter. Default: /etc/local/bin/rcswitch-pi
-    rcswitch_sendDuration = <minimum time in s between sending commands> # optional parameter. Default: 0.5
+    rcswitch_dir = path of rc switch # optional parameter. Default: /etc/local/bin/rcswitch-pi
+    rcswitch_sendDuration = minimum time in s between sending commands # optional parameter. Default: 0.5
 </pre>
 ## items.conf
 Just add following attributes to the items which shall be connected with rcswitch:
 <pre>
-rc_device = <number of device [1-5]>
-rc_code = <code of device [00000 - 11111]>
+rc_device = number of device [1-5]
+rc_code = code of device [00000 - 11111]
 </pre>
