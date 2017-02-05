@@ -111,5 +111,5 @@ Save and close the file. Now the file has to be made executeable with
 Last step is to ensure that the file is called during system boot. Therefore add the following  line has to be added to /etc/rc.local, right before the 'exit 0' command:
 <pre>/usr/local/scripts/exportGPIO17</pre>
 Now even after reboot it sould be possible to switch the power plungs with the rcswitch-pi 'send' command.
-
+## Further information
 For discussion see https://knx-user-forum.de/forum/supportforen/smarthome-py/39094-logic-und-howto-für-433mhz-steckdosen 
