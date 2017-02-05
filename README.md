@@ -15,27 +15,38 @@ The plugin depends on two 3rd party software packages:
 
 ### Installation of wiringPi:
 In case not already done, update the system and install git:
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install git-core
+<pre>
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git-core
+</pre>
 Then download wiringPi to /usr/local/bin/wiringPi
-    cd /usr/local/bin
-    sudo git clone git://git.drogon.net/wiringPi
+<pre>
+cd /usr/local/bin
+sudo git clone git://git.drogon.net/wiringPi
+</pre>
 and install it:
-    cd wiringPi
-    sudo ./build
+<pre>
+cd wiringPi
+sudo ./build
+</pre>
 
 >Soure: https://raspiprojekt.de/machen/basics/software/10-wiringpi.html?showall=&start=1
 
 ### Installation of rcswitch-pi
 Download the sources into /etc/local/bin/rcswitch-pi:
-  cd /usr/local/bin
-  sudo git clone https://github.com/r10r/rcswitch-pi.git
+<pre>
+cd /usr/local/bin
+sudo git clone https://github.com/r10r/rcswitch-pi.git
+<pre>
 Before building rcswitch-pi, the port has to be defineded the the code has to be slightly changed. Therefore edit the file send.cpp and the change the port to your needs and replace the command wiringPiSetup() to wiringPiSetupSys(). For editing the file:
-  cd rcswitch-pi
-  sudo nano send.cpp
+<pre>
+cd rcswitch-pi
+sudo nano send.cpp
+</pre>
 In our example the file send.cpp has to look like follwos:
-  int PIN = 17;
+<pre>
+int PIN = 17;
   char* systemCode = argv[1];
   int unitCode = atoi(argv[2]);
   int command = atoi(argv[3]);
@@ -53,9 +64,11 @@ In our example the file send.cpp has to look like follwos:
           mySwitch.switchOff(systemCode, unitCode);
           break;
       default:
+</pre>
 Save the file (ctrl + o) and leave nano (ctrl+x)
 Now rcswitch pi can be compiled:
-  cd rcswitch-pi
-  make
-
+<pre>
+cd rcswitch-pi
+make
+</pre>
 > source https://raspiprojekt.de/anleitungen/schaltungen/28-433-mhz-funksteckdosen-schalten.html?showall=&start=1
