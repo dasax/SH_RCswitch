@@ -13,17 +13,17 @@ The plugin depends on two 3rd party software packages:
 - wiringPi
 - rcswitch-pi
 
-### Installation of wiringPi*:
+### Installation of wiringPi:
 In case not already done, update the system and install git:
-  sudo apt-get update
-  sudo apt-get upgrade
-  sudo apt-get install git-core
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get install git-core
 Then download wiringPi to /usr/local/bin/wiringPi
-  cd /usr/local/bin
-  sudo git clone git://git.drogon.net/wiringPi
+    cd /usr/local/bin
+    sudo git clone git://git.drogon.net/wiringPi
 and install it:
-  cd wiringPi
-  sudo ./build
+    cd wiringPi
+    sudo ./build
 
 >Soure: https://raspiprojekt.de/machen/basics/software/10-wiringpi.html?showall=&start=1
 
