@@ -1,6 +1,21 @@
 # RCswitch
 RCswithc is a plugin for smarthomeNG to send RC switch commands. With this plugin 433mhz remote controlled power plugs can be controlled from the smarthomeNG environment.
 
+## plugin.conf
+Adding the following lines to plungin.conf in smarthomeNG will enable the rcswitch plugin:
+<pre>[rc]
+    class_name = RCswitch
+    class_path = plugins.rcswitch
+    rcswitch_dir = path of rc switch # optional parameter. Default: /etc/local/bin/rcswitch-pi
+    rcswitch_sendDuration = minimum time in s between sending commands # optional parameter. Default: 0.5
+</pre>
+## items.conf
+Just add following attributes to the items which shall be connected with rcswitch:
+<pre>
+rc_device = number of device [1-5]
+rc_code = code of device [00000 - 11111]
+</pre>
+
 ## Necessary Hardware
 - RaspberryPi or any other board wich has digital GPIO
 - [433 Mhz transmitter](https://www.google.de/search?q=433+mhz+transmitter&client=opera&hs=aeh&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjzsYKo7vHRAhXKWxoKHdk1D6YQ_AUICSgC&biw=1163&bih=589)
@@ -96,17 +111,3 @@ Save and close the file. Now the file has to be made executeable with
 Last step is to ensure that the file is called during system boot. Therefore add the following  line has to be added to /etc/rc.local, right before the 'exit 0' command:
 <pre>/usr/local/scripts/exportGPIO17</pre>
 Now even after reboot it sould be possible to switch the power plungs with the rcswitch-pi 'send' command.
-## plugin.conf
-Adding the following lines to plungin.conf in smarthomeNG will enable the rcswitch plugin:
-<pre>[rc]
-    class_name = RCswitch
-    class_path = plugins.rcswitch
-    rcswitch_dir = path of rc switch # optional parameter. Default: /etc/local/bin/rcswitch-pi
-    rcswitch_sendDuration = minimum time in s between sending commands # optional parameter. Default: 0.5
-</pre>
-## items.conf
-Just add following attributes to the items which shall be connected with rcswitch:
-<pre>
-rc_device = number of device [1-5]
-rc_code = code of device [00000 - 11111]
-</pre>
