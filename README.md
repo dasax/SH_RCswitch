@@ -6,8 +6,8 @@ Adding the following lines to plungin.conf in smarthomeNG will enable the rcswit
 <pre>[rc]
     class_name = RCswitch
     class_path = plugins.rcswitch
-    rcswitch_dir = path of rc switch # optional parameter. Default: /etc/local/bin/rcswitch-pi
-    rcswitch_sendDuration = minimum time in s between sending commands # optional parameter. Default: 0.5
+    rcswitch_dir = {path of rc switch} # optional parameter. Default: /etc/local/bin/rcswitch-pi
+    rcswitch_sendDuration = {minimum time in s between sending commands} # optional parameter. Default: 0.5
 </pre>
 ## items.conf
 Just add following attributes to the items which shall be connected with rcswitch:
@@ -111,3 +111,5 @@ Save and close the file. Now the file has to be made executeable with
 Last step is to ensure that the file is called during system boot. Therefore add the following  line has to be added to /etc/rc.local, right before the 'exit 0' command:
 <pre>/usr/local/scripts/exportGPIO17</pre>
 Now even after reboot it sould be possible to switch the power plungs with the rcswitch-pi 'send' command.
+
+For discussion see https://knx-user-forum.de/forum/supportforen/smarthome-py/39094-logic-und-howto-für-433mhz-steckdosen 
