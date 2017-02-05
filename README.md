@@ -88,7 +88,7 @@ make
 </pre>
 > source https://raspiprojekt.de/anleitungen/schaltungen/28-433-mhz-funksteckdosen-schalten.html?showall=&start=1
 
-##Preparing to send as non-root and testing
+##Send as non-root and testing
 For a first basic test, write access to non-root users can be granted with the command:
 <pre>gpio export 17 out</pre>
 Now, with the send command the power plugs can be swithed. Assuming, the power plug has code 11111 and address 2 (=B), the command to switch it on is:
