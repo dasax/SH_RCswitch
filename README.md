@@ -1,5 +1,5 @@
-# SH_RCswitch
-SH_RCswithc is a plugin for smarthomeNG to send RC switch commands. With this plugin 433mhz remote controlled power plugs can be controlled from the smarthomeNG environment.
+# RCswitch
+RCswithc is a plugin for smarthomeNG to send RC switch commands. With this plugin 433mhz remote controlled power plugs can be controlled from the smarthomeNG environment.
 
 ## Necessary Hardware
 - RaspberryPi or any other board wich has digital GPIO
@@ -38,7 +38,7 @@ Download the sources into /etc/local/bin/rcswitch-pi:
 <pre>
 cd /usr/local/bin
 sudo git clone https://github.com/r10r/rcswitch-pi.git
-<pre>
+</pre>
 Before building rcswitch-pi, the port has to be defineded the the code has to be slightly changed. Therefore edit the file send.cpp and the change the port to your needs and replace the command wiringPiSetup() to wiringPiSetupSys(). For editing the file:
 <pre>
 cd rcswitch-pi
@@ -72,3 +72,41 @@ cd rcswitch-pi
 make
 </pre>
 > source https://raspiprojekt.de/anleitungen/schaltungen/28-433-mhz-funksteckdosen-schalten.html?showall=&start=1
+
+##Preparing to send as non-root and testing
+For a first basic test, write access to non-root users can be granted with the command:
+<pre>gpio export 17 out</pre>
+Now, with the send command the power plugs can be swithed. Assuming, the power plug has code 11111 and address 2 (=B), the command to switch it on is:
+<pre>./send 11111 2 1</pre>
+If the power plug does not switch at this point, you need to figure out why before proceeding.
+
+Because the setting of port 17, done with the command 'gpio export 17 out' will be lost after reboot, it has to made persistent. Therefore create file /usr/local/scripts/exportGPIO17
+<pre>sudo mkdir /usr/local/scripts/
+cd /usr/local/scripts/
+sudo nano exportGPIO17
+</pre>
+and add the following content:
+<pre>#!/bin/sh  
+echo "17" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio17/direction
+chmod 666 /sys/class/gpio/gpio17/value
+chmod 666 /sys/class/gpio/gpio17/direction</pre>
+Save and close the file. Now the file has to be made executeable with
+<pre>sudo sudo chmod +x exportGPIO17</pre>
+Last step is to ensure that the file is called during system boot. Therefore add the following  line has to be added to /etc/rc.local, right before the 'exit 0' command:
+<pre>/usr/local/scripts/exportGPIO17</pre>
+Now even after reboot it sould be possible to switch the power plungs with the rcswitch-pi 'send' command.
+## plugin.conf
+Adding the following lines to plungin.conf in smarthomeNG will enable the rcswitch plugin:
+<pre>[rc]
+    class_name = RCswitch
+    class_path = plugins.rcswitch
+    rcswitch_dir = <path of rc switch> # optional parameter. Default: /etc/local/bin/rcswitch-pi
+    rcswitch_sendDuration = <minimum time in s between sending commands> # optional parameter. Default: 0.5
+</pre>
+## items.conf
+Just add following attributes to the items which shall be connected with rcswitch:
+<pre>
+rc_device = <number of device [1-5]>
+rc_code = <code of device [00000 - 11111]>
+</pre>
